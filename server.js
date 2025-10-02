@@ -1,20 +1,22 @@
-const express = require("express");
-const path = require("path");
+// server.js
+const express = require('express');
+const path = require('path');
 const app = express();
 
-// API
-app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from Node.js backend!" });
+const PORT = process.env.PORT || 10000;
+
+// 優先使用 Vite 的 dist，其次 CRA 的 build
+const distPath  = path.join(__dirname, 'client', 'dist');
+const buildPath = path.join(__dirname, 'client', 'build');
+const staticRoot = require('fs').existsSync(distPath) ? distPath : buildPath;
+
+app.use(express.static(staticRoot));
+
+// 讓前端路由可直接刷新
+app.get('*', (req, res) => {
+  res.sendFile(path.join(staticRoot, 'index.html'));
 });
 
-// Serve React build
-app.use(express.static(path.join(__dirname, "../client/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-});
-
-// Render 提供的 PORT
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
