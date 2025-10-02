@@ -7,5 +7,17 @@
   },
   "dependencies": {
     "express": "^4.21.2"
-  }
+  },
+  "description": "```bash cd client npm install npm run build cd ../server npm install node server.js ```",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andery-Lin/finane-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andery-Lin/finane-site/issues"
+  },
+  "homepage": "https://github.com/Andery-Lin/finane-site#readme"
 }
